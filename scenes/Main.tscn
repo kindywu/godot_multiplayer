@@ -1,15 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmain001"]
+[gd_scene format=3 uid="uid://bmain001"]
 
-[ext_resource type="Script" path="res://scripts/Main.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://drrwnq6x12jy6" path="res://scripts/Main.gd" id="1_script"]
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" unique_id=1297758547]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="Panel" type="PanelContainer" parent="." unique_id=441426950]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -20,35 +22,38 @@ offset_left = -200.0
 offset_top = -150.0
 offset_right = 200.0
 offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="VBox" type="VBoxContainer" parent="Panel"]
+[node name="VBox" type="VBoxContainer" parent="Panel" unique_id=1099701388]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="TitleLabel" type="Label" parent="Panel/VBox"]
+[node name="TitleLabel" type="Label" parent="Panel/VBox" unique_id=1016903194]
 layout_mode = 2
-horizontal_alignment = 1
-text = "Godot Multiplayer Demo"
 theme_override_font_sizes/font_size = 20
-
-[node name="StatusLabel" type="Label" parent="Panel/VBox"]
-layout_mode = 2
+text = "Godot Multiplayer Demo"
 horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="Panel/VBox" unique_id=1835968097]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
 text = "Choose a mode."
+horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="HSep" type="HSeparator" parent="Panel/VBox"]
+[node name="HSep" type="HSeparator" parent="Panel/VBox" unique_id=1986676693]
 layout_mode = 2
 
-[node name="ServerButton" type="Button" parent="Panel/VBox"]
+[node name="ServerButton" type="Button" parent="Panel/VBox" unique_id=118244071]
 layout_mode = 2
 text = "▶ Start Server  (port 5000)"
 
-[node name="AddressInput" type="LineEdit" parent="Panel/VBox"]
+[node name="AddressInput" type="LineEdit" parent="Panel/VBox" unique_id=1462670375]
 layout_mode = 2
-placeholder_text = "Server IP (default: 127.0.0.1)"
 text = "127.0.0.1"
+placeholder_text = "Server IP (default: 127.0.0.1)"
 
-[node name="ClientButton" type="Button" parent="Panel/VBox"]
+[node name="ClientButton" type="Button" parent="Panel/VBox" unique_id=1175379794]
 layout_mode = 2
 text = "⇒ Connect as Client"

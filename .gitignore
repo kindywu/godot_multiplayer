@@ -1,0 +1,28 @@
+# Godot 编辑器生成的缓存和临时文件
+.godot/
+
+# 导出的二进制文件（按需保留）
+*.exe
+*.x86_64
+*.arm64
+*.apk
+*.aab
+*.ipa
+*.dmg
+*.zip
+*.uid
+
+# macOS 垃圾文件
+.DS_Store
+
+# Windows 垃圾文件
+Thumbs.db
+
+# JetBrains IDE
+.idea/
+
+# VSCode
+.vscode/
+
+# 导出预设（包含签名密钥等敏感信息，不应提交）
+export_presets.cfg
