@@ -1,4 +1,4 @@
-# Godot 4 多人游戏 Demo（完整重写版）
+# Godot 4 多人游戏 Demo
 
 ## 文件结构
 
