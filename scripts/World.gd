@@ -1,21 +1,11 @@
-## World.gd v4 — 彻底放弃 MultiplayerSpawner，改用手动 RPC spawn
-##
-## MultiplayerSpawner 在 Godot 4.2 有很多坑（spawn_path、authority、时序）
-## 最可靠的方案：服务端直接 RPC 通知所有客户端，客户端自己实例化节点。
-##
-## 流程：
-##   客户端就绪 → rpc 通知服务端
-##   服务端 spawn 本地节点 + rpc 通知所有客户端也 spawn
-##   客户端收到 → 实例化节点 + 设置属性
-
 extends Node2D
 
-@onready var players_node : Node2D = $Players
+@onready var players_node: Node2D = $Players
 
 const PlayerScene := preload("res://scenes/Player.tscn")
 
-var _peer_players : Dictionary = {}
-var _player_count : int        = 0
+var _peer_players: Dictionary = {}
+var _player_count: int = 0
 
 
 func _ready() -> void:
@@ -44,11 +34,11 @@ func _do_spawn(peer_id: int) -> void:
 	if _peer_players.has(peer_id):
 		return
 
-	var color  := _hue_color(_player_count)
+	var color := _hue_color(_player_count)
 	_player_count += 1
-	var cx     := color.r
-	var cy     := color.g
-	var cz     := color.b
+	var cx := color.r
+	var cy := color.g
+	var cz := color.b
 
 	# 服务端本地 spawn
 	_spawn_local(peer_id, cx, cy, cz)
@@ -58,8 +48,8 @@ func _do_spawn(peer_id: int) -> void:
 
 	# 同时把所有已有玩家告诉新客户端
 	for existing_id in _peer_players:
-		var ep : CharacterBody2D = _peer_players[existing_id]
-		var ec : Color = ep.player_color
+		var ep: CharacterBody2D = _peer_players[existing_id]
+		var ec: Color = ep.player_color
 		_remote_spawn.rpc_id(peer_id, existing_id, ec.r, ec.g, ec.b)
 
 
@@ -75,11 +65,11 @@ func _spawn_local(peer_id: int, r: float, g: float, b: float) -> void:
 	if players_node.has_node("P%d" % peer_id):
 		return
 
-	var player : CharacterBody2D = PlayerScene.instantiate()
-	player.name          = "P%d" % peer_id
+	var player: CharacterBody2D = PlayerScene.instantiate()
+	player.name = "P%d" % peer_id
 	player.owner_peer_id = peer_id
-	player.player_color  = Color(r, g, b)
-	player.position      = Vector2.ZERO
+	player.player_color = Color(r, g, b)
+	player.position = Vector2.ZERO
 
 	players_node.add_child(player)
 	player._refresh_visuals()
@@ -95,7 +85,8 @@ func _remote_despawn(peer_id: int) -> void:
 
 func _despawn_local(peer_id: int) -> void:
 	if _peer_players.has(peer_id):
-		_peer_players[peer_id].queue_free()
+		var player = _peer_players[peer_id]
+		player.queue_free()
 		_peer_players.erase(peer_id)
 		print("[World] Despawned P%d" % peer_id)
 
